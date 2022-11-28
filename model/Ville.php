@@ -128,4 +128,34 @@ class Ville
 
         return $this;
     }
+    public static function GetVilleByIdDepartement($valeur)
+
+    {
+
+        $connexion = new Database;
+
+        $maBase = $connexion->connexion();
+
+        $query = "SELECT * FROM ville WHERE id_departement = '" . $valeur . "'";
+
+        $results = $maBase->prepare($query);
+
+        $results->execute();
+
+?>
+
+        <option value disabled selected>Séléctionnez une ville</option>
+
+        <?php
+
+        foreach ($results as $ville) {
+
+        ?>
+
+            <option value="<?php echo $ville["id_ville"]; ?>"><?php echo $ville["nom_ville"]; ?></option>
+
+<?php
+
+        }
+    }
 }
