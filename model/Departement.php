@@ -76,4 +76,34 @@ class Departement
 
         return $this;
     }
+    public static function GetDepartementByIdRegion($valeur)
+
+    {
+
+        $connexion = new Database;
+
+        $maBase = $connexion->connexion();
+
+        $query = "SELECT * FROM departement WHERE id_region = '" . $valeur . "'";
+
+        $results = $maBase->prepare($query);
+
+        $results->execute();
+
+?>
+
+        <option value disabled selected>Séléctionnez un département</option>
+
+        <?php
+
+        foreach ($results as $departement) {
+
+        ?>
+
+            <option value="<?php echo $departement["id_departement"]; ?>"><?php echo $departement["nom_departement"]; ?></option>
+
+<?php
+
+        }
+    }
 }
