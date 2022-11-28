@@ -78,4 +78,35 @@ class Region
 
         return $this;
     }
+
+    public static function GetAllRegion()
+
+    {
+
+        $connexion = new Database;
+
+        $maBase = $connexion->connexion();
+
+        $query = "SELECT * FROM region";
+
+        $results = $maBase->prepare($query);
+
+        $results->execute();
+
+?>
+
+        <option value disabled selected>Séléctionnez une région</option>
+
+        <?php
+
+        foreach ($results as $region) {
+
+        ?>
+
+            <option value="<?php echo $region["id_region"]; ?>"><?php echo $region["nom_region"]; ?></option>
+
+<?php
+
+        }
+    }
 }
